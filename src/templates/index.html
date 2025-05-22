@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Translation App</title>
+    <style>
+        body {
+            /* Realistic background image from Unsplash (royalty-free) */
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            max-width: 500px;
+            margin: 60px auto;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            padding: 36px 36px 28px 36px;
+            backdrop-filter: blur(2px);
+        }
+        h1 {
+            text-align: center;
+            color: #2d3a4b;
+            margin-bottom: 24px;
+        }
+        label {
+            font-weight: 600;
+            color: #2d3a4b;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+            border: 1px solid #b0c4de;
+            font-size: 1em;
+            background: #f7fafd;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        button {
+            width: 100%;
+            background: #66a6ff;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(102,166,255,0.15);
+        }
+        button:hover {
+            background: #4f8edc;
+        }
+        .result {
+            background: #f0f8ff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 18px;
+            color: #222;
+            font-size: 1.1em;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Text Translation Application</h1>
+        <form action="/translate" method="post">
+            <label for="source_language">Source Language:</label>
+            <select id="source_language" name="source_language" required>
+                {% for lang in languages %}
+                    <option value="{{ lang }}">{{ lang }}</option>
+                {% endfor %}
+            </select>
+            <label for="target_language">Target Language:</label>
+            <select id="target_language" name="target_language" required>
+                {% for lang in languages %}
+                    <option value="{{ lang }}">{{ lang }}</option>
+                {% endfor %}
+            </select>
+            <label for="text">Text to Translate:</label>
+            <textarea id="text" name="text" rows="4" required placeholder="Enter your text here..."></textarea>
+            <button type="submit">Translate</button>
+        </form>
+        {% if translated_text %}
+            <div class="result">
+                <strong>Translated Text:</strong>
+                <p>{{ translated_text }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
