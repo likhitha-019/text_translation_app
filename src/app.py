@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-from model.translator import Translator
+from src.model.translator import Translator
+
 from utils.languages import get_language_list
 
 app = Flask(__name__)
